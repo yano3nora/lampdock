@@ -4,6 +4,48 @@ FROM php:7.2-apache
 RUN cd /usr/bin && curl -s http://getcomposer.org/installer | php && ln -s /usr/bin/composer.phar /usr/bin/composer
 
 # Extensions.
+#
+# $ php -m
+# [PHP Modules]
+# Core
+# ctype
+# curl
+# date
+# dom
+# fileinfo
+# filter
+# ftp
+# gd
+# hash
+# iconv
+# json
+# libxml
+# mbstring
+# mcrypt
+# mysqlnd
+# openssl
+# pcre
+# PDO
+# pdo_mysql
+# pdo_pgsql
+# pdo_sqlite
+# Phar
+# posix
+# readline
+# Reflection
+# session
+# SimpleXML
+# sodium
+# SPL
+# sqlite3
+# standard
+# tokenizer
+# xml
+# xmlreader
+# xmlwriter
+# zip
+# zlib
+# 
 RUN apt-get update && apt-get install -y \
   git \
   zip \
