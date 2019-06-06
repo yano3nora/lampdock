@@ -94,6 +94,9 @@ RUN apt-get update && apt-get install -y \
   && a2enmod ssl \
   && a2ensite default-ssl
 
+# Set rewrite_mod
+RUN a2enmod rewrite
+
 # Set environments.
 ARG DOMAIN
 ARG CREDENTIAL
