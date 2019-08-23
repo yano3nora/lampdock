@@ -4,6 +4,48 @@ FROM php:7.2-apache
 RUN cd /usr/bin && curl -s http://getcomposer.org/installer | php && ln -s /usr/bin/composer.phar /usr/bin/composer
 
 # Extensions.
+#
+# $ php -m
+# [PHP Modules]
+# Core
+# ctype
+# curl
+# date
+# dom
+# fileinfo
+# filter
+# ftp
+# gd
+# hash
+# iconv
+# json
+# libxml
+# mbstring
+# mcrypt
+# mysqlnd
+# openssl
+# pcre
+# PDO
+# pdo_mysql
+# pdo_pgsql
+# pdo_sqlite
+# Phar
+# posix
+# readline
+# Reflection
+# session
+# SimpleXML
+# sodium
+# SPL
+# sqlite3
+# standard
+# tokenizer
+# xml
+# xmlreader
+# xmlwriter
+# zip
+# zlib
+# 
 RUN apt-get update && apt-get install -y \
   git \
   zip \
@@ -38,8 +80,9 @@ RUN sed -i -e "s|;mbstring.language = Japanese|mbstring.language = Japanese|" /u
   && sed -i -e "s|expose_php = On|expose_php = Off|" /usr/local/etc/php/php.ini \
   && sed -i -e "s|;date.timezone =|date.timezone = Asia/Tokyo|" /usr/local/etc/php/php.ini \
   && sed -i -e "s|display_errors = Off|display_errors = On|" /usr/local/etc/php/php.ini \
-  && sed -i -e "s|post_max_size = 8M|post_max_size = 100M|" /usr/local/etc/php/php.ini \
-  && sed -i -e "s|upload_max_filesize = 2M|upload_max_filesize = 100M|" /usr/local/etc/php/php.ini
+  && sed -i -e "s|post_max_size = 8M|post_max_size = 120M|" /usr/local/etc/php/php.ini \
+  && sed -i -e "s|upload_max_filesize = 2M|upload_max_filesize = 100M|" /usr/local/etc/php/php.ini \
+  && sed -i -e "s|memory_limit = 128M|memory_limit = 512M|" /usr/local/etc/php/php.ini
 
 # Set openssl.
 RUN apt-get update && apt-get install -y \
@@ -50,6 +93,9 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/* \
   && a2enmod ssl \
   && a2ensite default-ssl
+
+# Set rewrite_mod
+RUN a2enmod rewrite
 
 # Set environments.
 ARG DOMAIN
