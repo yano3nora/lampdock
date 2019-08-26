@@ -110,3 +110,4 @@ RUN echo "export WEB_ROOT='${WEB_ROOT}'" >> /etc/apache2/envvars
 RUN service apache2 restart
 
 WORKDIR /var/www
+RUN chown -R www-data:www-data .
