@@ -23,10 +23,11 @@ $ docker-compose run --rm db mysqld --initialize
 $ docker-compose up
 
 # Login to app container.
-$ docker-compose exec app bash
+$ docker-compose exec web bash
 
 # e.g. Install PHP framework that like the Laravel ...
 app> composer create-project --prefer-dist laravel/laravel laravel
+app> cd laravel
 app> php artisan key:generate --show
      > base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 app> exit
@@ -47,6 +48,8 @@ $ vi .env
   > APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   > DB_HOST=db
 
-# Restart containers.
-$ docker-compose restart
+# Rebuild containers.
+$ docker-compose down
+$ docker-compose build
+$ docker-compose up
 ```
